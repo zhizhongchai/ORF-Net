@@ -1,0 +1,57 @@
+_BASE_: "Base-Omni.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+  PROPOSAL_GENERATOR:
+    MIN_SIZE: 0
+    NAME: FCOS
+  OMNI:
+    BOX_DATA: True
+    DOT_DATA: True
+    DOT_ON: True
+    UNLABEL_DATA: True
+    UNLABEL_ON: True
+    MASK_DATA: True
+    MASK_ON: True
+  FCOS:
+    CENTER_SAMPLE: False  
+    
+DATASETS:
+  TRAIN_BOX: ("coco_ribfrac_box_20220706_train", "coco_ribfrac_box_20220706_train", "coco_ribfrac_box_20220706_train", "coco_ribfrac_box_20220706_train_neg",)
+  TRAIN_DOT: ("coco_ribfrac_dot_20220706_train","coco_ribfrac_dot_20220706_train","coco_ribfrac_dot_20220706_train", "coco_ribfrac_dot_20220706_train_neg",)
+  TRAIN_MASK: ("coco_ribfrac_mask_20220706_train", "coco_ribfrac_mask_20220706_train","coco_ribfrac_mask_20220706_train", "coco_ribfrac_mask_20220706_train_neg",)
+  TRAIN_NEG: ("coco_ribfrac_unlabel_20220706_train_neg", "coco_ribfrac_box_20220706_train_neg", )
+  TRAIN_UNLABEL: ("coco_ribfrac_unlabel_20220706_train", "coco_ribfrac_unlabel_20220706_train", "coco_ribfrac_unlabel_20220706_train", "coco_ribfrac_unlabel_20220706_train_neg",)
+  TEST: ("coco_val_mask_20220705",)
+SOLVER:
+  LR_SCHEDULER_NAME: "WarmupMultiStepLR"
+  IMS_PER_BATCH: 16
+  IMG_PER_BATCH_BOX: 1
+  IMG_PER_BATCH_DOT: 1
+  IMG_PER_BATCH_MASK: 1
+  IMG_PER_BATCH_UNLABEL: 1
+  BASE_LR: 0.001  # Note that RetinaNet uses a different default learning rate
+  STEPS: (30000, 60000)
+  MAX_ITER: 70000
+  CHECKPOINT_PERIOD: 2500
+  WARMUP_ITERS: 1000
+
+SEMISUPNET:
+  BURN_UP_STEP: 200000
+  BBOX_THRESHOLD: 0.5
+  TEACHER_UPDATE_ITER: 1
+  EMA_KEEP_RATE: 0.996
+  UNSUP_LOSS_WEIGHT: 4.0
+
+TEST:
+  EVAL_PERIOD: 2500
+
+OUTPUT_DIR: "output/omni/R_50_1x"
+
+INPUT:
+  MIN_SIZE_TRAIN: (1024, 1024)
+  MAX_SIZE_TEST: 1024
+  MAX_SIZE_TRAIN: 1024
+  MIN_SIZE_TEST: 1024
+  MIN_SIZE_TRAIN_SAMPLING: choice

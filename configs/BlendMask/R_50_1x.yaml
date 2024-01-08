@@ -1,0 +1,20 @@
+_BASE_: "Base-BlendMask.yaml"
+MODEL:
+  WEIGHTS: "detectron2://ImageNetPretrained/MSRA/R-50.pkl"
+  RESNETS:
+    DEPTH: 50
+
+#"coco_train_mask_pos", "coco_rib_box_0331_train", 
+
+DATASETS:
+  TRAIN: ("coco_train_mask_pos",)
+  TEST: ("coco_rib_val_0331_train",)
+SOLVER:
+  IMS_PER_BATCH: 16
+  BASE_LR: 0.01  # Note that RetinaNet uses a different default learning rate
+  STEPS: (60000, 80000)
+  MAX_ITER: 90000
+INPUT:
+  MIN_SIZE_TRAIN: (1024,)
+OUTPUT_DIR: "output/blendmask/R_50_1x"
+
