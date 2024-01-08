@@ -18,8 +18,8 @@ MODEL:
     THRESH_WITH_CTR: True
     USE_SCALE: False
 DATASETS:
-  TRAIN: ("coco_train_mask_pos",)
-  TEST: ("coco_rib_val_0331_train",)
+  TRAIN: ("train",)
+  TEST: ("test",)
 SOLVER:
   IMS_PER_BATCH: 16
   BASE_LR: 0.01  # Note that RetinaNet uses a different default learning rate

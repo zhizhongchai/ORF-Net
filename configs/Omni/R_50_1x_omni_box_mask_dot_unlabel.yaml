@@ -18,12 +18,11 @@ MODEL:
     CENTER_SAMPLE: False  
     
 DATASETS:
-  TRAIN_BOX: ("coco_ribfrac_box_20220706_train", "coco_ribfrac_box_20220706_train", "coco_ribfrac_box_20220706_train", "coco_ribfrac_box_20220706_train_neg",)
-  TRAIN_DOT: ("coco_ribfrac_dot_20220706_train","coco_ribfrac_dot_20220706_train","coco_ribfrac_dot_20220706_train", "coco_ribfrac_dot_20220706_train_neg",)
-  TRAIN_MASK: ("coco_ribfrac_mask_20220706_train", "coco_ribfrac_mask_20220706_train","coco_ribfrac_mask_20220706_train", "coco_ribfrac_mask_20220706_train_neg",)
-  TRAIN_NEG: ("coco_ribfrac_unlabel_20220706_train_neg", "coco_ribfrac_box_20220706_train_neg", )
-  TRAIN_UNLABEL: ("coco_ribfrac_unlabel_20220706_train", "coco_ribfrac_unlabel_20220706_train", "coco_ribfrac_unlabel_20220706_train", "coco_ribfrac_unlabel_20220706_train_neg",)
-  TEST: ("coco_val_mask_20220705",)
+  TRAIN_BOX: ("box_train", )
+  TRAIN_DOT: ("dot_train",)
+  TRAIN_MASK: ("mask_train",)
+  TRAIN_UNLABEL: ("unlabel_train",)
+  TEST: ("box_test",)
 SOLVER:
   LR_SCHEDULER_NAME: "WarmupMultiStepLR"
   IMS_PER_BATCH: 16
